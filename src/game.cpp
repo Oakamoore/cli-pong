@@ -15,9 +15,19 @@ void Game::draw()
 
 		for (std::size_t col {0}; col < Level::s_columns; ++col)
 		{
+			// Adds padding
+			m_level.setGrid()[row][col] = ' ';
+
+			// Draws the level's top and bottom borders
 			if (row == 0 || row == Level::s_rows - 1)
 				m_level.setGrid()[row][col] = m_symbols[level_border];
 
+			// Draws the level's centre line, excluding the top and bottom rows 
+			if (col == Level::s_centreColumn && (row != 0 && row != Level::s_rows - 1))
+				m_level.setGrid()[row][col] = m_symbols[level_centre];
+
+
+			
 			std::cout << m_level.getGrid()[row][col];
 		}
 

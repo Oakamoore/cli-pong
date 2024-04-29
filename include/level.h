@@ -8,6 +8,7 @@ class Level
 public:
 	static constexpr std::size_t s_rows {20};
 	static constexpr std::size_t s_columns {60};
+	static constexpr std::size_t s_centreColumn {(s_columns / 2) - 1};
 
 	using Grid = std::array<std::array<char, s_columns>, s_rows>;
 
