@@ -3,6 +3,7 @@
 
 #include "level.h"
 #include "paddle.h"
+#include "position.h"
 #include <array>
 
 class Game
@@ -21,12 +22,16 @@ private:
 		max_symbols
 	};
 
-	static constexpr std::array<char, max_symbols> m_symbols {-2, '\xDB', '\xB2', '\xDD'};
+	static constexpr std::array<char, max_symbols> s_symbols {-2, '\xDB', '\xB2', '\xDD'};
+
+	// Starting positions of the paddles
+	static constexpr Position<std::size_t> s_left {Level::s_centreRow, 1};
+	static constexpr Position<std::size_t> s_right {Level::s_centreRow, Level::s_columns - 2};
 
 private:
 	Level m_level {};
-	Paddle m_playerOne {{Level::s_centreRow, 1}};
-	Paddle m_playerTwo {{Level::s_centreRow, Level::s_columns - 2}};
+	Paddle m_playerOne {s_left};
+	Paddle m_playerTwo {s_right};
 
 };
 

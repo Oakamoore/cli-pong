@@ -12,9 +12,9 @@ void Game::draw()
 			auto [row, col] { p.getPositon() };
 
 			// Lengthens the paddle based on its centre position
-			m_level.setGrid()[row][col] = m_symbols[paddle];
-			m_level.setGrid()[row - 1][col] = m_symbols[paddle];
-			m_level.setGrid()[row + 1][col] = m_symbols[paddle];
+			m_level.setGrid()[row][col] = s_symbols[paddle];
+			m_level.setGrid()[row - 1][col] = s_symbols[paddle];
+			m_level.setGrid()[row + 1][col] = s_symbols[paddle];
 		}
 	};
 
@@ -33,11 +33,11 @@ void Game::draw()
 
 			// Draws the level's top and bottom borders
 			if (row == 0 || row == Level::s_rows - 1)
-				m_level.setGrid()[row][col] = m_symbols[level_border];
+				m_level.setGrid()[row][col] = s_symbols[level_border];
 
 			// Draws the level's centre line, excluding the top and bottom rows 
 			if (col == Level::s_centreColumn && (row != 0 && row != Level::s_rows - 1))
-				m_level.setGrid()[row][col] = m_symbols[level_centre];
+				m_level.setGrid()[row][col] = s_symbols[level_centre];
 
 			// Draws the paddles at opposite ends of the level
 			drawPaddle(m_playerOne);
