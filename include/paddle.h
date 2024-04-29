@@ -12,6 +12,8 @@ public:
 	{
 	}
 
+	const Position<std::size_t>& getPositon() const { return m_centre; }
+
 private:
 	Position<std::size_t> m_centre {};
 

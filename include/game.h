@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "level.h"
+#include "paddle.h"
 #include <array>
 
 class Game
@@ -24,7 +25,9 @@ private:
 
 private:
 	Level m_level {};
-	
+	Paddle m_playerOne {{Level::s_centreRow, 1}};
+	Paddle m_playerTwo {{Level::s_centreRow, Level::s_columns - 2}};
+
 };
 
 #endif

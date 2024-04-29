@@ -5,6 +5,19 @@
 
 void Game::draw()
 {
+	auto drawPaddle
+	{
+		[&](const Paddle& p)
+		{
+			auto [row, col] { p.getPositon() };
+
+			// Lengthens the paddle based on its centre position
+			m_level.setGrid()[row][col] = m_symbols[paddle];
+			m_level.setGrid()[row - 1][col] = m_symbols[paddle];
+			m_level.setGrid()[row + 1][col] = m_symbols[paddle];
+		}
+	};
+
 	system("cls");
 
 	std::cout << "\n\n\n";
@@ -26,8 +39,10 @@ void Game::draw()
 			if (col == Level::s_centreColumn && (row != 0 && row != Level::s_rows - 1))
 				m_level.setGrid()[row][col] = m_symbols[level_centre];
 
+			// Draws the paddles at opposite ends of the level
+			drawPaddle(m_playerOne);
+			drawPaddle(m_playerTwo);
 
-			
 			std::cout << m_level.getGrid()[row][col];
 		}
 
