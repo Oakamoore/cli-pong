@@ -3,6 +3,7 @@
 
 #include "position.h"
 #include <array>
+#include <string_view>
 
 namespace Directions
 {
@@ -19,6 +20,19 @@ namespace Directions
 		north_west,
 		max_directions
 	};
+
+	inline constexpr std::array<std::string_view, max_directions> directionalText
+	{{
+		{"none"},
+		{"north"},
+		{"east"},
+		{"south"},
+		{"west"},
+		{"north east"},
+		{"south east"},
+		{"south west"},
+		{"north west"}
+	}};
 
 	inline constexpr std::array<Position<int>, max_directions> directions
 	{{

@@ -17,6 +17,9 @@ public:
 	}
 
 	const Position<std::size_t>& getPositon() const { return m_centre; }
+	const Directions::Type getDirection() const { return m_direction; }
+	void setDirection(Directions::Type direction) { m_direction = direction; }
+
 
 private:
 	Position<std::size_t> m_centre {};

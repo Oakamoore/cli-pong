@@ -1,7 +1,8 @@
 #define NOMINMAX            // Prevents the redefinition of 'std::min' and 'std::max'
-#define WIN32_LEAN_AND_MEAN // Prevents the inclusion of sub-headers
+#define WIN32_LEAN_AND_MEAN // Prevents the inclusion of unnecessary sub-headers
 
 #include "game.h"
+#include "directions.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -60,29 +61,39 @@ void Game::input()
 	const auto [pTwoUp, pTwoDown] { s_pTwoControls };
 
 	// Raw terminal input, to register combinded keystrokes
+	// When there is no registered input, reset to 'none'
 
+	// Player one key press response 
 	if (GetKeyState(pOneUp) < 0)
-		std::cout << pOneUp;
+		m_playerOne.setDirection(Directions::north);
 	else if (GetKeyState(pOneDown) < 0)
-		std::cout << pOneDown;
+		m_playerOne.setDirection(Directions::south);
+	else
+		m_playerOne.setDirection(Directions::none);
 
+	// Player two key press reponse
 	if (GetKeyState(pTwoUp) < 0)
-		std::cout << pTwoUp;
+		m_playerTwo.setDirection(Directions::north);
 	else if (GetKeyState(pTwoDown) < 0)
-		std::cout << pTwoDown;
+		m_playerTwo.setDirection(Directions::south);
+	else
+		m_playerTwo.setDirection(Directions::none);
+
+	std::cout << "\n\nPlayer 1 Direction: " << Directions::directionalText[m_playerOne.getDirection()] << '\n';
+	std::cout << "Player 2 Direction: " << Directions::directionalText[m_playerTwo.getDirection()] << '\n';
 }
 
 void Game::run()
 {
 	using namespace std::chrono_literals;
 
-	auto frameDuration {1s};
+	auto frameDuration {1ms};
 
 	while (true)
 	{
 		draw();
 		input();
 
-		//std::this_thread::sleep_for(frameDuration);
+		std::this_thread::sleep_for(frameDuration);
 	}
 }
