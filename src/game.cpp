@@ -1,7 +1,11 @@
+#define NOMINMAX            // Prevents the redefinition of 'std::min' and 'std::max'
+#define WIN32_LEAN_AND_MEAN // Prevents the inclusion of sub-headers
+
 #include "game.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <windows.h>
 
 void Game::draw()
 {
@@ -50,6 +54,24 @@ void Game::draw()
 	}
 }
 
+void Game::input()
+{
+	const auto [pOneUp, pOneDown] { m_playerOne.getControlScheme() };
+	const auto [pTwoUp, pTwoDown] { m_playerTwo.getControlScheme() };
+
+	// Raw terminal input, to register combinded keystrokes
+
+	if (GetKeyState(pOneUp) < 0)
+		std::cout << pOneUp;
+	else if (GetKeyState(pOneDown) < 0)
+		std::cout << pOneDown;
+
+	if (GetKeyState(pTwoUp) < 0)
+		std::cout << pTwoUp;
+	else if (GetKeyState(pTwoDown) < 0)
+		std::cout << pTwoDown;
+}
+
 void Game::run()
 {
 	using namespace std::chrono_literals;
@@ -59,7 +81,8 @@ void Game::run()
 	while (true)
 	{
 		draw();
+		input();
 
-		std::this_thread::sleep_for(frameDuration);
+		//std::this_thread::sleep_for(frameDuration);
 	}
 }

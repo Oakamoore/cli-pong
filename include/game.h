@@ -10,6 +10,7 @@ class Game
 {
 public:
 	void draw();
+	void input();
 	void run();
 
 private:
