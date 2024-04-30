@@ -5,6 +5,7 @@
 #include "paddle.h"
 #include "position.h"
 #include <array>
+#include <utility>
 
 class Game
 {
@@ -30,13 +31,13 @@ private:
 	static constexpr Position<std::size_t> s_right {Level::s_centreRow, Level::s_columns - 2};
 
 	// The control scheme for the different paddles
-	static constexpr Paddle::Controls s_pOneControls {'W', 'S'};
-	static constexpr Paddle::Controls s_pTwoControls {'I', 'K'};
+	static constexpr std::pair<char, char> s_pOneControls {'W', 'S'};
+	static constexpr std::pair<char, char> s_pTwoControls {'I', 'K'};
 
 private:
 	Level m_level {};
-	Paddle m_playerOne {s_left, s_pOneControls};
-	Paddle m_playerTwo {s_right, s_pTwoControls};
+	Paddle m_playerOne {s_left};
+	Paddle m_playerTwo {s_right};
 
 };
 

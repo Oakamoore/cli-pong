@@ -11,18 +11,15 @@ class Paddle
 public:
 	using Controls = std::pair<char, char>;
 
-	Paddle(Position<std::size_t> startPos, Controls controls)
+	Paddle(Position<std::size_t> startPos)
 		: m_centre {startPos}
-		, m_controls {controls}
 	{
 	}
 
 	const Position<std::size_t>& getPositon() const { return m_centre; }
-	const Controls& getControlScheme() const { return m_controls; }
 
 private:
 	Position<std::size_t> m_centre {};
-	Controls m_controls {};
 	Directions::Type m_direction {Directions::none}; 
 };
 

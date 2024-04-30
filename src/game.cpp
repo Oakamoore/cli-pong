@@ -56,8 +56,8 @@ void Game::draw()
 
 void Game::input()
 {
-	const auto [pOneUp, pOneDown] { m_playerOne.getControlScheme() };
-	const auto [pTwoUp, pTwoDown] { m_playerTwo.getControlScheme() };
+	const auto [pOneUp, pOneDown] { s_pOneControls };
+	const auto [pTwoUp, pTwoDown] { s_pTwoControls };
 
 	// Raw terminal input, to register combinded keystrokes
 
