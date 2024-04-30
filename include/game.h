@@ -28,10 +28,14 @@ private:
 	static constexpr Position<std::size_t> s_left {Level::s_centreRow, 1};
 	static constexpr Position<std::size_t> s_right {Level::s_centreRow, Level::s_columns - 2};
 
+	// The control scheme for the different paddles
+	static constexpr Paddle::Controls s_pOneControls {'W', 'S'};
+	static constexpr Paddle::Controls s_pTwoControls {'I', 'K'};
+
 private:
 	Level m_level {};
-	Paddle m_playerOne {s_left};
-	Paddle m_playerTwo {s_right};
+	Paddle m_playerOne {s_left, s_pOneControls};
+	Paddle m_playerTwo {s_right, s_pTwoControls};
 
 };
 
