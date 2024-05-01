@@ -8,7 +8,7 @@ Ball::Ball(Position<std::size_t> startPos)
 	// The ball object is given a random horizontal direction upon construction
 	//m_direction = static_cast<Directions::Type>(Random::chooseBetween<int>(Directions::east, Directions::west));
 
-	m_direction = Directions::north;
+	m_direction = Directions::north_east;
 }
 
 void Ball::updatePosition()
@@ -24,7 +24,7 @@ void Ball::updatePosition()
 	m_front.col += Directions::directions[m_direction].col;
 }
 
-void Ball::reflect()
+void Ball::horizontalReflect()
 {
 	using namespace Directions;
 
@@ -56,3 +56,25 @@ void Ball::reflect()
 			break;
 	}
 }
+
+void Ball::verticalReflect()
+{
+	using namespace Directions;
+
+	switch (m_direction)
+	{
+		case north_east:
+			m_direction = north_west;
+			break;
+		case south_east:
+			m_direction = south_west;
+			break;
+		case south_west:
+			m_direction = south_east;
+			break;
+		case north_west:
+			m_direction = north_east;
+			break;
+	}
+}
+

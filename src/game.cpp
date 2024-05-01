@@ -162,7 +162,10 @@ void Game::logic()
 	switch (collisionObject)
 	{
 		case s_symbols[level_border]: 
-			m_ball.reflect();
+			m_ball.horizontalReflect();
+			break;
+		case s_symbols[paddle]:
+			m_ball.verticalReflect();
 			break;
 	}
 }
@@ -171,7 +174,7 @@ void Game::run()
 {
 	using namespace std::chrono_literals;
 
-	auto frameDuration {1ms};
+	auto frameDuration {0.1s};
 
 	while (true)
 	{
