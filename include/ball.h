@@ -10,6 +10,8 @@ class Ball
 public:
 	Ball(Position<std::size_t> startPos);
 
+	void updatePosition();
+
 	const Position<std::size_t>& getPosition() const { return m_currentPos; }
 	const Directions::Type& getDirection() const { return m_direction; }
 

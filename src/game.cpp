@@ -148,6 +148,8 @@ void Game::update()
 
 	if (isInBounds(m_playerTwo))
 		m_playerTwo.updatePosition();
+
+	m_ball.updatePosition();
 }
 
 void Game::run()
