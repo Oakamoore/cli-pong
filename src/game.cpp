@@ -14,7 +14,7 @@ void Game::draw()
 	{
 		[&](const Paddle& p)
 		{
-			auto [row, col] { p.getPositon() };
+			const auto& [row, col] { p.getPositon() };
 
 			// Lengthens the paddle based on its centre position
 			m_level.setGrid()[row][col] = s_symbols[paddle];
@@ -57,8 +57,8 @@ void Game::draw()
 
 void Game::input()
 {
-	const auto [pOneUp, pOneDown] { s_pOneControls };
-	const auto [pTwoUp, pTwoDown] { s_pTwoControls };
+	const auto& [pOneUp, pOneDown] { s_pOneControls };
+	const auto& [pTwoUp, pTwoDown] { s_pTwoControls };
 
 	// Raw terminal input, to register combinded keystrokes
 	// When there is no registered input, reset to 'none'
@@ -79,8 +79,11 @@ void Game::input()
 	else
 		m_playerTwo.setDirection(Directions::none);
 
-	std::cout << "\n\nPlayer 1 Direction: " << Directions::directionalText[m_playerOne.getDirection()] << '\n';
-	std::cout << "Player 2 Direction: " << Directions::directionalText[m_playerTwo.getDirection()] << '\n';
+	m_playerOne.updatePosition();
+	m_playerTwo.updatePosition();
+
+	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
+	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
 }
 
 void Game::run()
