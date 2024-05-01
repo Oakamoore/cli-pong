@@ -8,6 +8,20 @@
 #include <thread>
 #include <windows.h>
 
+static void clearScreen()
+{
+	// Represents standard output
+	static const HANDLE hOut {GetStdHandle(STD_OUTPUT_HANDLE)};
+
+	// Sends all written characters directly to the console
+	std::cout.flush();
+
+	// Default cursor position
+	COORD topLeft {0, 0};
+
+	SetConsoleCursorPosition(hOut, topLeft);
+}
+
 void Game::draw()
 {
 	auto drawPaddle
@@ -23,7 +37,8 @@ void Game::draw()
 		}
 	};
 
-	system("cls");
+	// Wipes the terminal
+	clearScreen();
 
 	std::cout << "\n\n\n";
 
@@ -65,19 +80,31 @@ void Game::input()
 
 	// Player one key press response 
 	if (GetKeyState(pOneUp) < 0)
+	{
 		m_playerOne.setDirection(Directions::north);
+	}
 	else if (GetKeyState(pOneDown) < 0)
+	{
 		m_playerOne.setDirection(Directions::south);
+	}
 	else
+	{
 		m_playerOne.setDirection(Directions::none);
+	}
 
 	// Player two key press reponse
 	if (GetKeyState(pTwoUp) < 0)
+	{
 		m_playerTwo.setDirection(Directions::north);
+	}
 	else if (GetKeyState(pTwoDown) < 0)
+	{
 		m_playerTwo.setDirection(Directions::south);
+	}
 	else
+	{
 		m_playerTwo.setDirection(Directions::none);
+	}
 
 	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
 	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
