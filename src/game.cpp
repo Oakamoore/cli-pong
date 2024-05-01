@@ -79,11 +79,36 @@ void Game::input()
 	else
 		m_playerTwo.setDirection(Directions::none);
 
-	m_playerOne.updatePosition();
-	m_playerTwo.updatePosition();
-
 	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
 	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
+}
+
+void Game::update()
+{
+	auto isInBounds
+	{
+		[](const Paddle& p)
+		{
+			auto row { p.getPositon().row };
+
+			// Takes into account the added length of the paddle
+			// and it's current direction
+			
+			if (row + 4 > Level::s_rows && p.getDirection() == Directions::south)
+				return false;
+
+			if (row - 2 <= 0 && p.getDirection() == Directions::north)
+				return false;
+
+			return true;
+		}
+	};
+
+	if (isInBounds(m_playerOne))
+		m_playerOne.updatePosition();
+
+	if (isInBounds(m_playerTwo))
+		m_playerTwo.updatePosition();
 }
 
 void Game::run()
@@ -96,6 +121,7 @@ void Game::run()
 	{
 		draw();
 		input();
+		update();
 
 		std::this_thread::sleep_for(frameDuration);
 	}

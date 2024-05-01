@@ -12,6 +12,7 @@ class Game
 public:
 	void draw();
 	void input();
+	void update();
 	void run();
 
 private:
