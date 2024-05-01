@@ -13,7 +13,6 @@ public:
 
 	using Grid = std::array<std::array<char, s_columns>, s_rows>;
 
-public:
 	Grid& setGrid() { return m_grid; }
 	const Grid& getGrid() const { return m_grid; }
 

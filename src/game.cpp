@@ -69,11 +69,9 @@ void Game::draw()
 			if (col == Level::s_centreColumn && (row != 0 && row != Level::s_rows - 1))
 				m_level.setGrid()[row][col] = s_symbols[level_centre];
 
-			// Draws the paddles at opposite ends of the level
 			drawPaddle(m_playerOne);
 			drawPaddle(m_playerTwo);
 
-			// Draws the current position of the ball
 			drawBall(m_ball);
 
 			std::cout << m_level.getGrid()[row][col];
@@ -121,6 +119,7 @@ void Game::input()
 
 	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
 	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
+	std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()] << '\n';
 }
 
 void Game::update()

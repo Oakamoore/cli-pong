@@ -21,9 +21,9 @@ namespace Directions
 		max_directions
 	};
 
-	inline constexpr std::array<std::string_view, max_directions> directionalText
+	inline constexpr std::array<std::string_view, max_directions> text
 	{{
-		{"none"},
+		{"none "},
 		{"north"},
 		{"east"},
 		{"south"},
