@@ -14,6 +14,7 @@ public:
 	void draw();
 	void input();
 	void update();
+	void logic();
 	void run();
 
 private:

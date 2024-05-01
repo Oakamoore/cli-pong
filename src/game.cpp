@@ -152,6 +152,21 @@ void Game::update()
 	m_ball.updatePosition();
 }
 
+void Game::logic()
+{
+	const auto& [row, col] { m_ball.getFront() };
+
+	// The object directly in front of the ball
+	char collisionObject {m_level.getGrid()[row][col]};
+
+	switch (collisionObject)
+	{
+		case s_symbols[level_border]: 
+			m_ball.reflect();
+			break;
+	}
+}
+
 void Game::run()
 {
 	using namespace std::chrono_literals;
@@ -163,6 +178,7 @@ void Game::run()
 		draw();
 		input();
 		update();
+		logic();
 
 		std::this_thread::sleep_for(frameDuration);
 	}
