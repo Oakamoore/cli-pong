@@ -37,6 +37,16 @@ void Game::draw()
 		}
 	};
 
+	auto drawBall
+	{
+		[&](const Ball& b)
+		{
+			const auto& [row, col] { b.getPosition() };
+
+			m_level.setGrid()[row][col] = s_symbols[ball];
+		}
+	};
+
 	// Wipes the terminal
 	clearScreen();
 
@@ -62,6 +72,9 @@ void Game::draw()
 			// Draws the paddles at opposite ends of the level
 			drawPaddle(m_playerOne);
 			drawPaddle(m_playerTwo);
+
+			// Draws the current position of the ball
+			drawBall(m_ball);
 
 			std::cout << m_level.getGrid()[row][col];
 		}
