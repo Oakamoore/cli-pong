@@ -124,32 +124,13 @@ void Game::input()
 
 void Game::update()
 {
-	auto isInBounds
-	{
-		[](const Paddle& p)
-		{
-			auto row { p.getPositon().row };
-
-			// Takes into account the added length of the paddle
-			// and it's current direction
-			
-			if (row + 4 > Level::s_rows && p.getDirection() == Directions::south)
-				return false;
-
-			if (row - 2 <= 0 && p.getDirection() == Directions::north)
-				return false;
-
-			return true;
-		}
-	};
-
-	if (isInBounds(m_playerOne))
+	if (m_playerOne.isInBounds())
 		m_playerOne.updatePosition();
 
-	if (isInBounds(m_playerTwo))
+	if (m_playerTwo.isInBounds())
 		m_playerTwo.updatePosition();
 
-	m_ball.updatePosition();
+	//m_ball.updatePosition();
 }
 
 void Game::logic()
@@ -174,7 +155,7 @@ void Game::run()
 {
 	using namespace std::chrono_literals;
 
-	auto frameDuration {0.1s};
+	auto frameDuration {1ms};
 
 	while (true)
 	{
