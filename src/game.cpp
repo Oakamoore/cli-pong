@@ -91,35 +91,32 @@ void Game::input()
 
 	// Player one key press response 
 	if (GetKeyState(pOneUp) < 0)
-	{
 		m_playerOne.setDirection(Directions::north);
-	}
 	else if (GetKeyState(pOneDown) < 0)
-	{
 		m_playerOne.setDirection(Directions::south);
-	}
 	else
-	{
 		m_playerOne.setDirection(Directions::none);
-	}
-
+	
 	// Player two key press reponse
 	if (GetKeyState(pTwoUp) < 0)
-	{
 		m_playerTwo.setDirection(Directions::north);
-	}
 	else if (GetKeyState(pTwoDown) < 0)
-	{
 		m_playerTwo.setDirection(Directions::south);
-	}
 	else
-	{
 		m_playerTwo.setDirection(Directions::none);
-	}
+
+	// Either paddle is at a level border
+	// and a respective key is still being pressed
+
+	if((GetKeyState(pOneUp) < 0 || GetKeyState(pOneDown) < 0) && !m_playerOne.isInBounds())
+		m_playerOne.setDirection(Directions::none);
+
+	if ((GetKeyState(pTwoUp) < 0 || GetKeyState(pTwoDown) < 0) && !m_playerTwo.isInBounds())
+		m_playerTwo.setDirection(Directions::none);
 
 	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
 	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
-	std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()] << '\n';
+	//std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()] << '\n';
 }
 
 void Game::update()
@@ -155,7 +152,7 @@ void Game::run()
 {
 	using namespace std::chrono_literals;
 
-	auto frameDuration {1ms};
+	const auto frameDuration {1ms};
 
 	while (true)
 	{
