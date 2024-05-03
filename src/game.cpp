@@ -116,7 +116,7 @@ void Game::input()
 
 	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
 	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
-	//std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()] << '\n';
+	std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()];
 }
 
 void Game::update()
@@ -127,7 +127,7 @@ void Game::update()
 	if (m_playerTwo.isInBounds())
 		m_playerTwo.updatePosition();
 
-	//m_ball.updatePosition();
+	m_ball.updatePosition();
 }
 
 void Game::logic()
@@ -146,6 +146,8 @@ void Game::logic()
 			m_ball.verticalReflect();
 			break;
 	}
+
+	std::cout << ", Side:" << (m_ball.getSide() ? " Right\n" : "  Left\n");
 }
 
 void Game::run()

@@ -6,9 +6,7 @@ Ball::Ball(Position<std::size_t> startPos)
 	, m_currentPos {m_startPos}
 {
 	// The ball object is given a random horizontal direction upon construction
-	//m_direction = static_cast<Directions::Type>(Random::chooseBetween<int>(Directions::east, Directions::west));
-
-	m_direction = Directions::north_east;
+	m_direction = static_cast<Directions::Type>(Random::chooseBetween<int>(Directions::east, Directions::west));
 }
 
 void Ball::updatePosition()
@@ -16,6 +14,9 @@ void Ball::updatePosition()
 	// Modify the current position of the ball based on its direction
 	m_currentPos.row += Directions::directions[m_direction].row;
 	m_currentPos.col += Directions::directions[m_direction].col;
+
+	// Determine the side of the level the ball is on
+	m_side = (m_currentPos.col > Level::s_centreColumn ? Level::right : Level::left);
 
 	// The front of the ball is one position in front of the current position
 	m_front = m_currentPos;
@@ -33,14 +34,8 @@ void Ball::horizontalReflect()
 		case north: 
 			m_direction = south;
 			break;
-		case east:
-			m_direction = west;
-			break;
 		case south:
 			m_direction = north;
-			break;
-		case west:
-			m_direction = east;
 			break;
 		case north_east:
 			m_direction = south_east;
@@ -63,6 +58,12 @@ void Ball::verticalReflect()
 
 	switch (m_direction)
 	{
+		case east:
+			m_direction = west;
+			break;
+		case west:
+			m_direction = east;
+			break;
 		case north_east:
 			m_direction = north_west;
 			break;

@@ -6,6 +6,13 @@
 class Level
 {
 public:
+	enum Side
+	{
+		left,
+		right,
+	};
+
+public:
 	static constexpr std::size_t s_rows {21};
 	static constexpr std::size_t s_columns {65};
 	static constexpr std::size_t s_centreColumn {(s_columns / 2) - 1};

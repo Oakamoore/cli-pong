@@ -24,9 +24,9 @@ namespace Random
 	T chooseBetween(T a, T b)
 	{
 		// Generates either 'true' or 'false', 1/2 of the time
-		std::bernoulli_distribution dist {0.5};
+		std::bernoulli_distribution dist {};
 
-		return (dist(mt)) ? a : b;
+		return (dist(mt) ? a : b);
 	}
 }
 
