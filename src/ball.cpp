@@ -17,13 +17,51 @@ void Ball::updatePosition()
 	// Determine the side of the level the ball is on
 	m_side = (m_currentPos.col > Level::s_centreColumn ? Level::right : Level::left);
 
-	// The front of the ball is one position in front of the current position
-	m_front = m_currentPos + Directions::directions[m_direction];
+	using enum Directions::Type;
+
+	// The vertical and horizontal fronts of the ball are 
+	// Diagonals are treated as their horizontal directional component
+	switch (m_direction)
+	{
+		case north:
+			m_verticalFront = m_currentPos + Directions::directions[north];
+			m_horizontalFront = m_verticalFront;
+			break;
+		case south:
+			m_verticalFront = m_currentPos + Directions::directions[south];
+			m_horizontalFront = m_verticalFront;
+			break;
+		case east:			
+			m_horizontalFront = m_currentPos + Directions::directions[east];
+			m_verticalFront = m_horizontalFront;
+			break;
+		case south_east:
+			m_horizontalFront = m_currentPos + Directions::directions[east];
+			m_verticalFront = m_currentPos + Directions::directions[south];
+			break;
+		case north_east:
+			m_horizontalFront = m_currentPos + Directions::directions[east];
+			m_verticalFront = m_currentPos + Directions::directions[north];
+			break;
+		case west:          
+			m_horizontalFront = m_currentPos + Directions::directions[west];
+			m_verticalFront = m_horizontalFront;
+			break;
+		case south_west:
+			m_horizontalFront = m_currentPos + Directions::directions[west];
+			m_verticalFront = m_currentPos + Directions::directions[south];
+			break;
+		case north_west:
+			m_horizontalFront = m_currentPos + Directions::directions[west];
+			m_verticalFront = m_currentPos + Directions::directions[north];
+			break;
+	}
+
 }
 
 void Ball::horizontalReflect()
 {
-	using namespace Directions;
+	using enum Directions::Type;
 
 	switch (m_direction)
 	{
@@ -50,7 +88,7 @@ void Ball::horizontalReflect()
 
 void Ball::verticalReflect()
 {
-	using namespace Directions;
+	using enum Directions::Type;
 
 	switch (m_direction)
 	{
@@ -77,7 +115,7 @@ void Ball::verticalReflect()
 
 void Ball::gainPaddleDirection(Directions::Type paddleDirection)
 {
-	using namespace Directions;
+	using enum Directions::Type;
 
 	switch (paddleDirection)
 	{

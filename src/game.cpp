@@ -8,7 +8,7 @@
 #include <thread>
 #include <windows.h>
 
-static void clearScreen()
+static void updateFrame()
 {
 	// Represents standard output
 	static const HANDLE hOut {GetStdHandle(STD_OUTPUT_HANDLE)};
@@ -47,8 +47,9 @@ void Game::draw()
 		}
 	};
 
-	// Wipes the terminal
-	clearScreen();
+	// Update game elements that have 
+	// changed since the last frame
+	updateFrame();
 
 	std::cout << "\n\n\n";
 
@@ -75,9 +76,11 @@ void Game::draw()
 			drawBall(m_ball);
 
 			// Drawing the position in front of the ball - checking bug
-			auto [fr, fc] { m_ball.getFront() };
+			auto [hr, hc] { m_ball.getHorizontalFront() };
+			auto [vr, vc] { m_ball.getVerticalFront() };
 
-			m_level.setGrid()[fr][fc] = '-';
+			m_level.setGrid()[hr][hc] = '-';
+			m_level.setGrid()[vr][vc] = '-';
 
 			std::cout << m_level.getGrid()[row][col];
 		}
@@ -141,22 +144,24 @@ void Game::update()
 
 void Game::logic()
 {
-	const auto& [row, col] { m_ball.getFront() };
+	const auto& [hRow, hCol] { m_ball.getHorizontalFront() };
+	const auto& [vRow, vCol] { m_ball.getVerticalFront() };
 
-	// The object directly in front of the ball
-	char collisionObject {m_level.getGrid()[row][col]};
+	// The objects directly in front of the ball in a given axis
+	char verticalCollisionObject {m_level.getGrid()[vRow][vCol]};
+	char horizontalCollisionObject {m_level.getGrid()[hRow][hCol]};
 
-	switch (collisionObject)
+	if (verticalCollisionObject == s_symbols[level_border])
 	{
-		case s_symbols[level_border]: 
-			m_ball.horizontalReflect();
-			break;
-		case s_symbols[paddle]:
-			if (m_ball.getSide() == Level::left)
-				m_ball.gainPaddleDirection(m_playerOne.getDirection());
-			else
-				m_ball.gainPaddleDirection(m_playerTwo.getDirection());
-			break;
+		m_ball.horizontalReflect();
+	}
+
+	if (horizontalCollisionObject == s_symbols[paddle])
+	{
+		if (m_ball.getSide() == Level::left)
+			m_ball.gainPaddleDirection(m_playerOne.getDirection());
+		else
+			m_ball.gainPaddleDirection(m_playerTwo.getDirection());
 	}
 
 	std::cout << ", Side:" << (m_ball.getSide() ? " Right\n" : "  Left\n");
