@@ -30,8 +30,8 @@ private:
 	static constexpr std::array<char, max_symbols> s_symbols {-2, '\xDB', '\xB2', '\xDD'};
 
 	// Starting positions of the paddles
-	static constexpr Position<std::size_t> s_left {Level::s_centreRow, 1};
-	static constexpr Position<std::size_t> s_right {Level::s_centreRow, Level::s_columns - 2};
+	static constexpr Position<std::size_t> s_left {Level::s_centreRow, 3};
+	static constexpr Position<std::size_t> s_right {Level::s_centreRow, Level::s_columns - 4};
 
 	// Starting position of the ball
 	static constexpr Position<std::size_t> s_middle {Level::s_centreRow, Level::s_centreColumn};
