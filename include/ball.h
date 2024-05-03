@@ -14,6 +14,9 @@ public:
 	void updatePosition();
 	void horizontalReflect();
 	void verticalReflect();
+	void gainPaddleDirection(Directions::Type paddleDirection);
+
+	void reset() { *this = {m_startPos}; }
 
 	const Position<std::size_t>& getPosition() const { return m_currentPos; }
 	const Position<std::size_t>& getFront() const { return m_front; }

@@ -74,6 +74,11 @@ void Game::draw()
 
 			drawBall(m_ball);
 
+			// Drawing the position in front of the ball - checking bug
+			auto [fr, fc] { m_ball.getFront() };
+
+			m_level.setGrid()[fr][fc] = '-';
+
 			std::cout << m_level.getGrid()[row][col];
 		}
 
@@ -127,6 +132,10 @@ void Game::update()
 	if (m_playerTwo.isInBounds())
 		m_playerTwo.updatePosition();
 
+	// TEMP
+	if (m_ball.getPosition().col == Level::s_columns - 2 || m_ball.getPosition().col == 1)
+		m_ball.reset();
+
 	m_ball.updatePosition();
 }
 
@@ -143,7 +152,10 @@ void Game::logic()
 			m_ball.horizontalReflect();
 			break;
 		case s_symbols[paddle]:
-			m_ball.verticalReflect();
+			if (m_ball.getSide() == Level::left)
+				m_ball.gainPaddleDirection(m_playerOne.getDirection());
+			else
+				m_ball.gainPaddleDirection(m_playerTwo.getDirection());
 			break;
 	}
 

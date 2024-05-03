@@ -79,3 +79,21 @@ void Ball::verticalReflect()
 	}
 }
 
+void Ball::gainPaddleDirection(Directions::Type paddleDirection)
+{
+	using namespace Directions;
+
+	switch (paddleDirection)
+	{
+		case north:
+			m_side == Level::left ? m_direction = north_east : m_direction = north_west;
+			break;
+		case south:
+			m_side == Level::left ? m_direction = south_east : m_direction = south_west;
+			break;
+		case none:
+			verticalReflect(); // Treat the paddle as a stationary object
+			break;
+	}
+}
+
