@@ -12,17 +12,13 @@ Ball::Ball(Position<std::size_t> startPos)
 void Ball::updatePosition()
 {
 	// Modify the current position of the ball based on its direction
-	m_currentPos.row += Directions::directions[m_direction].row;
-	m_currentPos.col += Directions::directions[m_direction].col;
+	m_currentPos = m_currentPos + Directions::directions[m_direction];
 
 	// Determine the side of the level the ball is on
 	m_side = (m_currentPos.col > Level::s_centreColumn ? Level::right : Level::left);
 
 	// The front of the ball is one position in front of the current position
-	m_front = m_currentPos;
-
-	m_front.row += Directions::directions[m_direction].row;
-	m_front.col += Directions::directions[m_direction].col;
+	m_front = m_currentPos + Directions::directions[m_direction];
 }
 
 void Ball::horizontalReflect()
