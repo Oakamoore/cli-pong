@@ -1,26 +1,9 @@
-#define NOMINMAX            // Prevents the redefinition of 'std::min' and 'std::max'
-#define WIN32_LEAN_AND_MEAN // Prevents the inclusion of unnecessary sub-headers
-
 #include "game.h"
 #include "directions.h"
+#include "console.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include <windows.h>
-
-static void updateFrame()
-{
-	// Represents standard output
-	static const HANDLE hOut {GetStdHandle(STD_OUTPUT_HANDLE)};
-
-	// Sends all written characters directly to the console
-	std::cout.flush();
-
-	// Default cursor position
-	COORD topLeft {0, 0};
-
-	SetConsoleCursorPosition(hOut, topLeft);
-}
 
 void Game::draw()
 {
@@ -49,7 +32,7 @@ void Game::draw()
 
 	// Update game elements that have 
 	// changed since the last frame
-	updateFrame();
+	Console::updateFrame();
 
 	std::cout << "\n\n\n";
 
