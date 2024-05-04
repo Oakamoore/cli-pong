@@ -19,98 +19,37 @@ void Ball::updatePosition()
 
 	using enum Directions::Type;
 
-	// The vertical and horizontal fronts of the ball are 
-	// Diagonals are treated as their horizontal directional component
-	switch (m_direction)
+	// Sets the direction of each 'front' based on the ball's current direction
+	for (Directions::Type direction {north}; direction < max_directions; ++direction)
 	{
-		case north:
-			m_verticalFront = m_currentPos + Directions::directions[north];
+		// Accounts for the cardinal directions
+		if ((direction >= north && direction <= west) && m_direction == direction)
+		{
+			m_verticalFront = m_currentPos + Directions::directions[direction];
 			m_horizontalFront = m_verticalFront;
-			break;
-		case south:
-			m_verticalFront = m_currentPos + Directions::directions[south];
-			m_horizontalFront = m_verticalFront;
-			break;
-		case east:			
-			m_horizontalFront = m_currentPos + Directions::directions[east];
-			m_verticalFront = m_horizontalFront;
-			break;
-		case south_east:
-			m_horizontalFront = m_currentPos + Directions::directions[east];
-			m_verticalFront = m_currentPos + Directions::directions[south];
-			break;
-		case north_east:
-			m_horizontalFront = m_currentPos + Directions::directions[east];
-			m_verticalFront = m_currentPos + Directions::directions[north];
-			break;
-		case west:          
-			m_horizontalFront = m_currentPos + Directions::directions[west];
-			m_verticalFront = m_horizontalFront;
-			break;
-		case south_west:
-			m_horizontalFront = m_currentPos + Directions::directions[west];
-			m_verticalFront = m_currentPos + Directions::directions[south];
-			break;
-		case north_west:
-			m_horizontalFront = m_currentPos + Directions::directions[west];
-			m_verticalFront = m_currentPos + Directions::directions[north];
-			break;
-	}
+		}
 
+		// Accounts for the intercardinal directions 
+		if ((direction >= north_east && direction <= north_west) && m_direction == direction)
+		{
+			auto [vertical, horizontal] { Directions::intercardinalSplit.at(direction) };
+
+			m_verticalFront = m_currentPos + Directions::directions[vertical];
+			m_horizontalFront = m_currentPos + Directions::directions[horizontal];
+		}
+	}
 }
 
 void Ball::horizontalReflect()
 {
-	using enum Directions::Type;
-
-	switch (m_direction)
-	{
-		case north: 
-			m_direction = south;
-			break;
-		case south:
-			m_direction = north;
-			break;
-		case north_east:
-			m_direction = south_east;
-			break;
-		case south_east:
-			m_direction = north_east;
-			break;
-		case south_west:
-			m_direction = north_west;
-			break;
-		case north_west:
-			m_direction = south_west;
-			break;
-	}
+	// Sets the balls direction to its horizontal opposite
+	m_direction = Directions::horizontalOpposite.at(m_direction);
 }
 
 void Ball::verticalReflect()
 {
-	using enum Directions::Type;
-
-	switch (m_direction)
-	{
-		case east:
-			m_direction = west;
-			break;
-		case west:
-			m_direction = east;
-			break;
-		case north_east:
-			m_direction = north_west;
-			break;
-		case south_east:
-			m_direction = south_west;
-			break;
-		case south_west:
-			m_direction = south_east;
-			break;
-		case north_west:
-			m_direction = north_east;
-			break;
-	}
+	// Sets the balls direction to its vertical opposite
+	m_direction = Directions::verticalOpposite.at(m_direction);
 }
 
 void Ball::gainPaddleDirection(Directions::Type paddleDirection)

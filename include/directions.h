@@ -3,6 +3,8 @@
 
 #include "position.h"
 #include <array>
+#include <unordered_map>
+#include <utility>
 #include <string_view>
 
 namespace Directions
@@ -20,6 +22,48 @@ namespace Directions
 		north_west,
 		max_directions
 	};
+
+	// Opposite horizontal directional pairs
+	inline const std::unordered_map<Type, Type> horizontalOpposite
+	{
+		{north, south},
+		{south, north},
+		{north_east, south_east},
+		{south_east, north_east},
+		{south_west, north_west},
+		{north_west, south_west}
+	};
+
+	// Opposite vertical directional pairs
+	inline const std::unordered_map<Type, Type> verticalOpposite
+	{
+		{east, west},
+		{west, east},
+		{north_east, north_west},
+		{south_east, south_west},
+		{south_west, south_east},
+		{north_west, north_east}
+	};
+
+	// Maps an intercardinal direction to its base cardinal directions
+	inline const std::unordered_map<Type, std::pair<Type, Type>> intercardinalSplit
+	{
+		{south_east, {south, east}},
+		{north_east, {north, east}},
+		{south_west, {south, west}},
+		{north_west, {north, west}}
+	};
+
+	inline Type& operator++(Type& direction)
+	{
+		// Wraps the enumerator around 
+		if (direction == max_directions)
+			direction = none;
+		else
+			direction = static_cast<Type>(direction + 1);
+
+		return direction;
+	}
 
 	inline constexpr std::array<std::string_view, max_directions> text
 	{{
