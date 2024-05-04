@@ -78,7 +78,7 @@ namespace Directions
 		{"north west"}
 	}};
 
-	inline constexpr std::array<Position<int>, max_directions> directions
+	inline constexpr std::array<Position<int>, max_directions> positionOffset
 	{{
 		{0, 0},    // None
 		{-1, 0},   // North

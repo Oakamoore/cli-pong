@@ -12,7 +12,7 @@ Ball::Ball(Position<std::size_t> startPos)
 void Ball::updatePosition()
 {
 	// Modify the current position of the ball based on its direction
-	m_currentPos = m_currentPos + Directions::directions[m_direction];
+	m_currentPos = m_currentPos + Directions::positionOffset[m_direction];
 
 	// Determine the side of the level the ball is on
 	m_side = (m_currentPos.col > Level::s_centreColumn ? Level::right : Level::left);
@@ -25,7 +25,7 @@ void Ball::updatePosition()
 		// Accounts for the cardinal directions
 		if ((direction >= north && direction <= west) && m_direction == direction)
 		{
-			m_verticalFront = m_currentPos + Directions::directions[direction];
+			m_verticalFront = m_currentPos + Directions::positionOffset[direction];
 			m_horizontalFront = m_verticalFront;
 		}
 
@@ -34,8 +34,8 @@ void Ball::updatePosition()
 		{
 			auto [vertical, horizontal] { Directions::intercardinalSplit.at(direction) };
 
-			m_verticalFront = m_currentPos + Directions::directions[vertical];
-			m_horizontalFront = m_currentPos + Directions::directions[horizontal];
+			m_verticalFront = m_currentPos + Directions::positionOffset[vertical];
+			m_horizontalFront = m_currentPos + Directions::positionOffset[horizontal];
 		}
 	}
 }

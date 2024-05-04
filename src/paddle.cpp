@@ -4,12 +4,12 @@
 void Paddle::updatePosition()
 {
 	// Modify the centre position of the paddle based on it's direction
-	m_centre = m_centre + Directions::directions[m_direction];
+	m_centre = m_centre + Directions::positionOffset[m_direction];
 }
 
 bool Paddle::isInBounds() const
 {
-	// Accounts for the adding length of the paddle
+	// Accounts for the added length of the paddle
 	static const int topOffset {2};
 	static const int bottomOffset {4};
 
