@@ -99,10 +99,6 @@ void Game::input()
 
 	if ((GetKeyState(pTwoUp) < 0 || GetKeyState(pTwoDown) < 0) && !m_playerTwo.isInBounds())
 		m_playerTwo.setDirection(Directions::none);
-
-	std::cout << "\n\nP1 Direction: " << Directions::text[m_playerOne.getDirection()] << ",  ";
-	std::cout << "P2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
-	std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()];
 }
 
 void Game::update()
@@ -138,8 +134,6 @@ void Game::logic()
 			m_ball.gainPaddleDirection(m_playerTwo.getDirection());
 	}
 
-	std::cout << ", Side:" << (m_ball.getSide() ? " Right\n" : "  Left\n");
-
 	// The ball has reached the vertical level bounds 
 	if (m_ball.getPosition().col == Level::s_columns - 2 || m_ball.getPosition().col == 1)
 	{
@@ -156,13 +150,19 @@ void Game::run()
 
 	const auto frameDuration {1ms};
 
-	while (true)
+	while (!m_hasEnded)
 	{
 		draw();
 		input();
 		update();
 		logic();
 
+		if (m_pOneScore == Config::maxScore || m_pTwoScore == Config::maxScore)
+			m_hasEnded = true;
+
 		std::this_thread::sleep_for(frameDuration);
 	}
+
+	// Final game state
+	draw();
 }

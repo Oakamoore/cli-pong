@@ -7,6 +7,9 @@
 
 namespace Config
 {
+	// Max game score
+	inline constexpr int maxScore {10};
+
 	// Starting positions of the paddles
 	inline constexpr Position<std::size_t> leftPos {Level::s_centreRow, 3};
 	inline constexpr Position<std::size_t> rightPos {Level::s_centreRow, Level::s_columns - 4};

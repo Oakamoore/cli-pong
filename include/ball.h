@@ -20,7 +20,6 @@ public:
 	const Position<std::size_t>& getPosition() const { return m_currentPos; }
 	const Position<std::size_t>& getHorizontalFront() const { return m_horizontalFront; }
 	const Position<std::size_t>& getVerticalFront() const { return m_verticalFront; }
-	const Directions::Type& getDirection() const { return m_direction; }
 	const Level::Side& getSide() const { return m_side; }
 
 private:

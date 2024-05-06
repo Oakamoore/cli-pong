@@ -36,6 +36,7 @@ private:
 	Ball m_ball {Config::midPos};
 	int m_pOneScore {};
 	int m_pTwoScore {};
+	bool m_hasEnded {};
 
 };
 
