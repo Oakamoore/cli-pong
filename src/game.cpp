@@ -165,4 +165,12 @@ void Game::run()
 
 	// Final game state
 	draw();
+
+	std::this_thread::sleep_for(2s);
+
+	// Wipes the terminal
+	Console::clearScreen();
+
+	std::cout << "\n\n\n\n\n\t\t\t\t\t\t";
+	std::cout << "Player " << (m_pOneScore > m_pTwoScore ? "1" : "2") << " wins!\n\n\n\n";
 }

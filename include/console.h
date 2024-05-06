@@ -14,6 +14,7 @@ namespace Console
 	// Default cursor position
 	const COORD topLeft {0, 0};
 
+	void setSize();
 	void updateFrame();
 	void clearScreen();
 }
