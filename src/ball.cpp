@@ -19,7 +19,7 @@ void Ball::updatePosition()
 
 	using enum Directions::Type;
 
-	// Sets the direction of each 'front' based on the ball's current direction
+	// Sets the position of each 'front' based on the ball's current direction
 	for (Directions::Type direction {north}; direction < max_directions; ++direction)
 	{
 		// Accounts for the cardinal directions
@@ -56,6 +56,7 @@ void Ball::gainPaddleDirection(Directions::Type paddleDirection)
 {
 	using enum Directions::Type;
 
+	// The ball adopts the paddle's vertical directional component
 	switch (paddleDirection)
 	{
 		case north:
@@ -70,3 +71,18 @@ void Ball::gainPaddleDirection(Directions::Type paddleDirection)
 	}
 }
 
+void Ball::reset()
+{
+	m_currentPos = m_startPos;
+
+	// The player scored against receives the ball
+	switch (m_side)
+	{
+		case Level::left: 
+			m_direction = Directions::west;
+			break;
+		case Level::right:
+			m_direction = Directions::east;
+			break;
+	}
+}

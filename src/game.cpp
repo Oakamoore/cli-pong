@@ -58,13 +58,6 @@ void Game::draw()
 
 			drawBall(m_ball);
 
-			// Drawing the position in front of the ball - checking bug
-			auto [hr, hc] { m_ball.getHorizontalFront() };
-			auto [vr, vc] { m_ball.getVerticalFront() };
-
-			m_level.setGrid()[hr][hc] = '-';
-			m_level.setGrid()[vr][vc] = '-';
-
 			std::cout << m_level.getGrid()[row][col];
 		}
 
@@ -118,10 +111,6 @@ void Game::update()
 	if (m_playerTwo.isInBounds())
 		m_playerTwo.updatePosition();
 
-	// TEMP
-	if (m_ball.getPosition().col == Level::s_columns - 2 || m_ball.getPosition().col == 1)
-		m_ball.reset();
-
 	m_ball.updatePosition();
 }
 
@@ -131,15 +120,15 @@ void Game::logic()
 	const auto& [vRow, vCol] { m_ball.getVerticalFront() };
 
 	// The objects directly in front of the ball in a given axis
-	char verticalCollisionObject {m_level.getGrid()[vRow][vCol]};
-	char horizontalCollisionObject {m_level.getGrid()[hRow][hCol]};
+	char vObj {m_level.getGrid()[vRow][vCol]};
+	char hObj {m_level.getGrid()[hRow][hCol]};
 
-	if (verticalCollisionObject == s_symbols[level_border])
+	if (vObj == s_symbols[level_border])
 	{
 		m_ball.horizontalReflect();
 	}
 
-	if (horizontalCollisionObject == s_symbols[paddle])
+	if (hObj == s_symbols[paddle])
 	{
 		if (m_ball.getSide() == Level::left)
 			m_ball.gainPaddleDirection(m_playerOne.getDirection());
@@ -148,6 +137,10 @@ void Game::logic()
 	}
 
 	std::cout << ", Side:" << (m_ball.getSide() ? " Right\n" : "  Left\n");
+
+	// The ball has reached the vertical level bounds 
+	if (m_ball.getPosition().col == Level::s_columns - 2 || m_ball.getPosition().col == 1)
+		m_ball.reset();
 }
 
 void Game::run()
