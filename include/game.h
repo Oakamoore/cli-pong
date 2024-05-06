@@ -34,6 +34,8 @@ private:
 	Paddle m_playerOne {Config::leftPos};
 	Paddle m_playerTwo {Config::rightPos};
 	Ball m_ball {Config::midPos};
+	int m_pOneScore {};
+	int m_pTwoScore {};
 
 };
 

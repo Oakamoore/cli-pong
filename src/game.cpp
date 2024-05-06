@@ -34,6 +34,8 @@ void Game::draw()
 	// changed since the last frame
 	Console::updateFrame();
 
+	std::cout << "\n\t\t\t\t\t\tPlayer 1: " << m_pOneScore;
+	std::cout << "\t Player 2: " << m_pTwoScore;
 	std::cout << "\n\n\n";
 
 	for (std::size_t row {0}; row < Level::s_rows; ++row)
@@ -98,8 +100,8 @@ void Game::input()
 	if ((GetKeyState(pTwoUp) < 0 || GetKeyState(pTwoDown) < 0) && !m_playerTwo.isInBounds())
 		m_playerTwo.setDirection(Directions::none);
 
-	std::cout << "\n\nPlayer 1 Direction: " << Directions::text[m_playerOne.getDirection()] << '\n';
-	std::cout << "Player 2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
+	std::cout << "\n\nP1 Direction: " << Directions::text[m_playerOne.getDirection()] << ",  ";
+	std::cout << "P2 Direction: " << Directions::text[m_playerTwo.getDirection()] << '\n';
 	std::cout << "Ball Direction: " << Directions::text[m_ball.getDirection()];
 }
 
@@ -119,7 +121,7 @@ void Game::logic()
 	const auto& [hRow, hCol] { m_ball.getHorizontalFront() };
 	const auto& [vRow, vCol] { m_ball.getVerticalFront() };
 
-	// The objects directly in front of the ball in a given axis
+	// The objects directly in front of the ball in a given plane
 	char vObj {m_level.getGrid()[vRow][vCol]};
 	char hObj {m_level.getGrid()[hRow][hCol]};
 
@@ -140,7 +142,12 @@ void Game::logic()
 
 	// The ball has reached the vertical level bounds 
 	if (m_ball.getPosition().col == Level::s_columns - 2 || m_ball.getPosition().col == 1)
+	{
+		// Update player scores 
+		m_ball.getSide() == Level::right ? ++m_pOneScore : ++m_pTwoScore;
+		
 		m_ball.reset();
+	}
 }
 
 void Game::run()
