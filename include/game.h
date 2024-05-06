@@ -3,8 +3,8 @@
 
 #include "level.h"
 #include "paddle.h"
-#include "position.h"
 #include "ball.h"
+#include "config.h"
 #include <array>
 #include <utility>
 
@@ -29,22 +29,11 @@ private:
 
 	static constexpr std::array<char, max_symbols> s_symbols {-2, '\xDB', '\xB2', '\xDD'};
 
-	// Starting positions of the paddles
-	static constexpr Position<std::size_t> s_left {Level::s_centreRow, 3};
-	static constexpr Position<std::size_t> s_right {Level::s_centreRow, Level::s_columns - 4};
-
-	// Starting position of the ball
-	static constexpr Position<std::size_t> s_middle {Level::s_centreRow, Level::s_centreColumn};
-
-	// The control scheme for the different paddles
-	static constexpr std::pair<char, char> s_pOneControls {'W', 'S'};
-	static constexpr std::pair<char, char> s_pTwoControls {'I', 'K'};
-
 private:
 	Level m_level {};
-	Paddle m_playerOne {s_left};
-	Paddle m_playerTwo {s_right};
-	Ball m_ball {s_middle};
+	Paddle m_playerOne {Config::leftPos};
+	Paddle m_playerTwo {Config::rightPos};
+	Ball m_ball {Config::midPos};
 
 };
 

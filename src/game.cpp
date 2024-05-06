@@ -67,8 +67,8 @@ void Game::draw()
 
 void Game::input()
 {
-	const auto& [pOneUp, pOneDown] { s_pOneControls };
-	const auto& [pTwoUp, pTwoDown] { s_pTwoControls };
+	const auto& [pOneUp, pOneDown] { Config::pOneControls };
+	const auto& [pTwoUp, pTwoDown] { Config::pTwoControls };
 
 	// Raw terminal input, to register combinded keystrokes
 	// When there is no registered input, reset to 'none'
