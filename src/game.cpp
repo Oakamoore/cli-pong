@@ -35,12 +35,12 @@ void Game::draw()
 	Console::updateFrame();
 
 	std::cout << "\n\t\t\t\t\t\tPlayer 1: " << m_pOneScore;
-	std::cout << "\t Player 2: " << m_pTwoScore;
+	std::cout << "\tPlayer 2: " << m_pTwoScore;
 	std::cout << "\n\n\n";
 
 	for (std::size_t row {0}; row < Level::s_rows; ++row)
 	{
-		std::cout << "\t\t\t       ";
+		std::cout << "\t\t\t      ";
 
 		for (std::size_t col {0}; col < Level::s_columns; ++col)
 		{
@@ -152,6 +152,9 @@ void Game::run()
 
 	while (!m_hasEnded)
 	{
+		// Prevents the console from being resized
+		Console::setSize();
+
 		draw();
 		input();
 		update();

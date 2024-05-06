@@ -14,6 +14,10 @@ namespace Console
 	// Default cursor position
 	const COORD topLeft {0, 0};
 
+	// Console dimensions
+	const int cWidth {1000};
+	const int cHeight {500};
+
 	void setSize();
 	void updateFrame();
 	void clearScreen();

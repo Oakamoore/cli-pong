@@ -5,7 +5,15 @@ namespace Console
 {
 	void setSize()
 	{
+		HWND console {GetConsoleWindow()};
 
+		RECT r {};
+
+		// Stores the console's current dimensions
+		GetWindowRect(console, &r);
+
+		// Changes the console's size
+		MoveWindow(console, r.left, r.top, cWidth, cHeight, TRUE);
 	}
 
 	void updateFrame()
