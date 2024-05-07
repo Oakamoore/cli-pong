@@ -10,13 +10,12 @@ namespace Menu
 		play,
 		exit
 	};
-
-	void displayTitle();
 	
 	// Allows the menu options to be navigated through
 	Options operator++(Options& option);
 	Options operator--(Options& option);
-	
+
+	void displayTitle();
 	Options getOption();
 }
 

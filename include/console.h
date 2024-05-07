@@ -1,8 +1,11 @@
 #ifndef	CONSOLE_H
 #define CONSOLE_H
 
-#define NOMINMAX			// Prevents the redefinition of 'std::min' and 'std::max'
-#define WIN32_LEAN_AND_MEAN	// Prevents the inclusion of unnecessary sub-headers
+// Prevents the redefinition of 'std::min' and 'std::max'
+#define NOMINMAX		
+
+// Prevents the inclusion of unnecessary sub-headers
+#define WIN32_LEAN_AND_MEAN	
 
 #include <windows.h>
 
@@ -16,11 +19,13 @@ namespace Console
 
 	// Console dimensions
 	const int cWidth {1000};
-	const int cHeight {500};
+	const int cHeight {600};
 
 	void setSize();
 	void updateFrame();
 	void clearScreen();
+	void printTabs(int numTabs);
+	void printLines(int numLines);
 }
 
 #endif

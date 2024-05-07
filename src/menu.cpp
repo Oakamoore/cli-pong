@@ -13,6 +13,8 @@ namespace Menu
 		std::cout << R"(
 
 
+
+
 					      ____     ___    _   _    ____ 
 					     |  _ \   / _ \  | \ | |  / ___|
 					     | |_) | | | | | |  \| | | |  _ 
@@ -25,8 +27,12 @@ namespace Menu
 
 
 					       (Navigate using arrow keys)
+				    		  (Select using enter)
 
-		)" << "\n\n\n\n";
+
+		)";
+
+		Console::printLines(4);
 	}
 
 	Options operator++(Options& option)
@@ -55,9 +61,6 @@ namespace Menu
 	{
 		Options option {};
 
-		// Returns a constructed string of tabs
-		auto printTab {[](std::size_t num) { return std::string(num, '\t'); }};
-
 		bool hasSelected {};
 		bool isDisplaying {};
 
@@ -67,8 +70,11 @@ namespace Menu
 			{
 				displayTitle();
 
-				std::cout << printTab(7) << "  Play <--\n";
-				std::cout << printTab(7) << "  Exit\n";
+				Console::printTabs(7);
+				std::cout << "   Play  <--\n";
+
+				Console::printTabs(7);
+				std::cout << "   Exit\n";
 
 				isDisplaying = true;
 			}
@@ -76,8 +82,11 @@ namespace Menu
 			{
 				displayTitle();
 
-				std::cout << printTab(7) << "  Play\n";
-				std::cout << printTab(7) << "  Exit <--\n";
+				Console::printTabs(7);
+				std::cout << "   Play\n";
+				
+				Console::printTabs(7);
+				std::cout << "   Exit  <--\n";
 
 				isDisplaying = true;
 			}

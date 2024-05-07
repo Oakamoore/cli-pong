@@ -14,6 +14,9 @@ namespace Console
 
 		// Changes the console's size
 		MoveWindow(console, r.left, r.top, cWidth, cHeight, TRUE);
+
+		// Prevents the console from being resized
+		SetWindowLongPtr(console, GWL_STYLE, GetWindowLongPtr(console, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
 	}
 
 	void updateFrame()
@@ -47,5 +50,17 @@ namespace Console
 		FillConsoleOutputAttribute(hOut, csbi.wAttributes, cellCount, topLeft, &filledCount);
 
 		SetConsoleCursorPosition(hOut, topLeft);
+	}
+
+	void printTabs(int numTabs)
+	{
+		while (numTabs--)
+			std::cout << '\t';
+	}
+
+	void printLines(int numLines)
+	{
+		while (numLines--)
+			std::cout << '\n';
 	}
 }

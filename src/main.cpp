@@ -1,8 +1,11 @@
+#include "console.h"
 #include "menu.h"
 #include "game.h"
 
 int main()
 {
+	Console::setSize();
+	
 	bool isRunning {true};
 
 	while (isRunning)

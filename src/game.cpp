@@ -34,9 +34,13 @@ void Game::draw()
 	// changed since the last frame
 	Console::updateFrame();
 
-	std::cout << "\n\t\t\t\t\t\tPlayer 1: " << m_pOneScore;
+	Console::printLines(4);
+	Console::printTabs(6);
+
+	std::cout << "Player 1: " << m_pOneScore;
 	std::cout << "\tPlayer 2: " << m_pTwoScore;
-	std::cout << "\n\n\n";
+
+	Console::printLines(3);
 
 	for (std::size_t row {0}; row < Level::s_rows; ++row)
 	{
@@ -118,15 +122,15 @@ void Game::logic()
 	const auto& [vRow, vCol] { m_ball.getVerticalFront() };
 
 	// The objects directly in front of the ball in a given plane
-	char vObj {m_level.getGrid()[vRow][vCol]};
-	char hObj {m_level.getGrid()[hRow][hCol]};
+	char verticalCollisionObject {m_level.getGrid()[vRow][vCol]};
+	char horizontalCollisionObject {m_level.getGrid()[hRow][hCol]};
 
-	if (vObj == s_symbols[level_border])
+	if (verticalCollisionObject == s_symbols[level_border])
 	{
 		m_ball.horizontalReflect();
 	}
 
-	if (hObj == s_symbols[paddle])
+	if (horizontalCollisionObject == s_symbols[paddle])
 	{
 		if (m_ball.getSide() == Level::left)
 			m_ball.gainPaddleDirection(m_playerOne.getDirection());
@@ -134,10 +138,10 @@ void Game::logic()
 			m_ball.gainPaddleDirection(m_playerTwo.getDirection());
 	}
 
-	// The ball has reached the vertical level bounds 
+	// The ball is out of level's vertical bounds 
 	if (m_ball.getPosition().col == Level::s_columns - 2 || m_ball.getPosition().col == 1)
 	{
-		// Update player scores 
+		// Update the appropriate player's score
 		m_ball.getSide() == Level::right ? ++m_pOneScore : ++m_pTwoScore;
 		
 		m_ball.reset();
@@ -152,9 +156,6 @@ void Game::run()
 
 	while (!m_hasEnded)
 	{
-		// Prevents the console from being resized
-		Console::setSize();
-
 		draw();
 		input();
 		update();
@@ -173,12 +174,11 @@ void Game::run()
 
 	// Wipes the terminal
 	Console::clearScreen();
-	
-	// Returns a constructed string of tabs, or newline characters
-	auto printTab {[](std::size_t num) { return std::string(num, '\t'); }};
-	auto printNewline {[](std::size_t num) { return std::string(num, '\n'); }};
 
-	std::cout << printNewline(13) << printTab(6) <<  "      Player " << (m_pOneScore > m_pTwoScore ? "1" : "2") << " wins!";
+	Console::printLines(16);
+	Console::printTabs(6);
+
+	std::cout << "      Player " << (m_pOneScore > m_pTwoScore ? "1" : "2") << " wins!";
 	
 	std::this_thread::sleep_for(2s);
 }
