@@ -173,7 +173,12 @@ void Game::run()
 
 	// Wipes the terminal
 	Console::clearScreen();
+	
+	// Returns a constructed string of tabs, or newline characters
+	auto printTab {[](std::size_t num) { return std::string(num, '\t'); }};
+	auto printNewline {[](std::size_t num) { return std::string(num, '\n'); }};
 
-	std::cout << "\n\n\n\n\n\t\t\t\t\t\t";
-	std::cout << "Player " << (m_pOneScore > m_pTwoScore ? "1" : "2") << " wins!\n\n\n\n";
+	std::cout << printNewline(13) << printTab(6) <<  "      Player " << (m_pOneScore > m_pTwoScore ? "1" : "2") << " wins!";
+	
+	std::this_thread::sleep_for(2s);
 }
