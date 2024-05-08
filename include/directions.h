@@ -24,7 +24,7 @@ namespace Directions
 	};
 
 	// Opposite horizontal directional pairs
-	inline const std::unordered_map<Type, Type> horizontalOpposite
+	const std::unordered_map<Type, Type> horizontalOpposite
 	{
 		{north, south},
 		{south, north},
@@ -35,7 +35,7 @@ namespace Directions
 	};
 
 	// Opposite vertical directional pairs
-	inline const std::unordered_map<Type, Type> verticalOpposite
+	const std::unordered_map<Type, Type> verticalOpposite
 	{
 		{east, west},
 		{west, east},
@@ -46,7 +46,7 @@ namespace Directions
 	};
 
 	// Maps an intercardinal direction to its base cardinal directions
-	inline const std::unordered_map<Type, std::pair<Type, Type>> intercardinalSplit
+	const std::unordered_map<Type, std::pair<Type, Type>> intercardinalSplit
 	{
 		{south_east, {south, east}},
 		{north_east, {north, east}},
@@ -65,20 +65,7 @@ namespace Directions
 		return direction;
 	}
 
-	inline constexpr std::array<std::string_view, max_directions> text
-	{{
-		{"none "},
-		{"north"},
-		{"east"},
-		{"south"},
-		{"west"},
-		{"north east"},
-		{"south east"},
-		{"south west"},
-		{"north west"}
-	}};
-
-	inline constexpr std::array<Position<int>, max_directions> positionOffset
+	constexpr std::array<Position<int>, max_directions> positionOffset
 	{{
 		{0, 0},    // None
 		{-1, 0},   // North
