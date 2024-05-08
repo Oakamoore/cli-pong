@@ -11,12 +11,14 @@
 class Game
 {
 public:
+	void run();
+
+private:
 	void draw();
 	void input();
 	void update();
 	void logic();
-	void run();
-
+	
 private:
 	enum Symbols
 	{
