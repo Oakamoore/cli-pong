@@ -37,7 +37,6 @@ namespace Menu
 
 	Options operator++(Options& option)
 	{
-		// Ensure enumerator is valid
 		if (option == exit)
 			option = exit;
 		else
@@ -48,7 +47,6 @@ namespace Menu
 
 	Options operator--(Options& option)
 	{
-		// Ensure enumerator is valid
 		if (option == play)
 			option = play;
 		else

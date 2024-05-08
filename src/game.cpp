@@ -95,8 +95,8 @@ void Game::input()
 	else
 		m_playerTwo.setDirection(Directions::none);
 
-	// Either paddle is at a level border
-	// and a respective key is still being pressed
+	// When a paddle is at a level border
+	// and a movement key is still being pressed
 
 	if((GetKeyState(pOneUp) < 0 || GetKeyState(pOneDown) < 0) && !m_playerOne.isInBounds())
 		m_playerOne.setDirection(Directions::none);

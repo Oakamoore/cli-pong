@@ -4,6 +4,7 @@
 
 int main()
 {
+	// Set size, and prevent resizing
 	Console::setSize();
 	
 	bool isRunning {true};
