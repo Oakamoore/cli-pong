@@ -1,6 +1,12 @@
 #include "paddle.h"
 #include "level.h"
 
+Paddle::Paddle(Position<std::size_t> startPos)
+	: m_centre {startPos}
+	, m_direction {Directions::none}
+{
+}
+
 void Paddle::updatePosition()
 {
 	// Modify the centre position of the paddle based on it's direction
@@ -10,8 +16,8 @@ void Paddle::updatePosition()
 bool Paddle::isInBounds() const
 {
 	// Accounts for the added length of the paddle
-	static const int topOffset {2};
-	static const int bottomOffset {4};
+	static constexpr int topOffset {2};
+	static constexpr int bottomOffset {4};
 
 	if (m_centre.row - topOffset <= 0 && m_direction == Directions::north)
 		return false;

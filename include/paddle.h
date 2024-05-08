@@ -9,10 +9,7 @@
 class Paddle
 {
 public:
-	Paddle(Position<std::size_t> startPos)
-		: m_centre {startPos}
-	{
-	}
+	Paddle(Position<std::size_t> startPos);
 
 	void updatePosition();
 	bool isInBounds() const;
@@ -23,7 +20,7 @@ public:
 
 private:
 	Position<std::size_t> m_centre {};
-	Directions::Type m_direction {Directions::none}; 
+	Directions::Type m_direction {}; 
 };
 
 #endif
