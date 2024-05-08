@@ -1,12 +1,24 @@
 #include "ball.h"
-#include "random.h"
+#include <random>
+
+static Directions::Type getRandHorizontalDirection()
+{
+	std::random_device rd {};
+	
+	static std::mt19937 mt {rd()};
+
+	// Generates either 'true' or 'false', 1/2 of the time
+	std::bernoulli_distribution dist {};
+
+	return (dist(mt) ? Directions::east : Directions::west);
+}
 
 Ball::Ball(Position<std::size_t> startPos)
 	: m_startPos {startPos}
 	, m_currentPos {m_startPos}
 {
 	// The ball object is given a random horizontal direction upon construction
-	m_direction = static_cast<Directions::Type>(Random::chooseBetween<int>(Directions::east, Directions::west));
+	m_direction = getRandHorizontalDirection();
 }
 
 void Ball::updatePosition()
