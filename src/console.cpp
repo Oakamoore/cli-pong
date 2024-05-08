@@ -13,7 +13,7 @@ namespace Console
 		GetWindowRect(console, &r);
 
 		// Changes the console's size
-		MoveWindow(console, r.left, r.top, cWidth, cHeight, TRUE);
+		MoveWindow(console, r.left, r.top, cnslWidth, cnslHeight, TRUE);
 
 		// Prevents the console from being resized
 		SetWindowLongPtr(console, GWL_STYLE, GetWindowLongPtr(console, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);

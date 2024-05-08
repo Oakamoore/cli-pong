@@ -16,9 +16,8 @@ static Directions::Type getRandHorizontalDirection()
 Ball::Ball(Position<std::size_t> startPos)
 	: m_startPos {startPos}
 	, m_currentPos {m_startPos}
+	, m_direction {getRandHorizontalDirection()}
 {
-	// The ball object is given a random horizontal direction upon construction
-	m_direction = getRandHorizontalDirection();
 }
 
 void Ball::updatePosition()

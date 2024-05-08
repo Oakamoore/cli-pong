@@ -18,8 +18,8 @@ namespace Console
 	const COORD topLeft {0, 0};
 
 	// Console dimensions
-	const int cWidth {1000};
-	const int cHeight {600};
+	const int cnslWidth {1000};
+	const int cnslHeight {600};
 
 	void setSize();
 	void updateFrame();
