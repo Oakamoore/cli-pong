@@ -6,7 +6,7 @@
 
 A command line implementation of **two player** pong, built using [WinAPI](https://learn.microsoft.com/en-us/previous-versions/aa383723(v=vs.85)). 
 
-![demo](https://media.giphy.com/media/NgPhuyf1hXVQyHZiZR/giphy.gif)
+ <img src="https://media.giphy.com/media/NgPhuyf1hXVQyHZiZR/giphy.gif"/>
 
 ### Controls 
 
