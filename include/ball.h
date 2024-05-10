@@ -17,10 +17,10 @@ public:
 	void gainPaddleDirection(Directions::Type paddleDirection);
 	void reset();
 
-	const Position<std::size_t>& getPosition() const { return m_currentPos; }
-	const Position<std::size_t>& getHorizontalFront() const { return m_horizontalFront; }
-	const Position<std::size_t>& getVerticalFront() const { return m_verticalFront; }
-	const Level::Side& getSide() const { return m_side; }
+	const auto& getPosition() const { return m_currentPos; }
+	const auto& getHorizontalFront() const { return m_horizontalFront; }
+	const auto& getVerticalFront() const { return m_verticalFront; }
+	const auto& getSide() const { return m_side; }
 
 private:
 	Position<std::size_t> m_startPos {};

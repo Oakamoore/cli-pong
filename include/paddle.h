@@ -14,8 +14,8 @@ public:
 	void updatePosition();
 	bool isInBounds() const;
 
-	const Position<std::size_t>& getPositon() const { return m_centre; }
-	const Directions::Type getDirection() const { return m_direction; }
+	const auto& getPositon() const { return m_centre; }
+	const auto getDirection() const { return m_direction; }
 	void setDirection(Directions::Type direction) { m_direction = direction; }
 
 private:
