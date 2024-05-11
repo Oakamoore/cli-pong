@@ -6,13 +6,14 @@
 
 A command line implementation of **two player** pong, built using [WinAPI](https://learn.microsoft.com/en-us/previous-versions/aa383723(v=vs.85)). 
 
- <img src="https://media.giphy.com/media/NgPhuyf1hXVQyHZiZR/giphy.gif"/>
+![demo](./demo.gif)
 
 ### Controls 
 
 Player controls are `W, S`, and `I, K` 
 
-- This can be changed from within in [`config.h`](https://github.com/Oakamoore/cli-pong/blob/main/include/config.h) - must be an **uppercase alphabetic** character. 
+- This can be changed from within in [`config.h`](https://github.com/Oakamoore/cli-pong/blob/main/include/config.h) 
+	- Must be an **uppercase alphabetic** character, or a valid [virtual key code](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
 
 ## Installation
 
@@ -21,6 +22,7 @@ Player controls are `W, S`, and `I, K`
 ```shell
 git clone https://github.com/Oakamoore/cli-pong.git
 ```
+
 2. Step into the repository
 
 ```shell
