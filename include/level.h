@@ -18,8 +18,7 @@ public:
 	static constexpr std::size_t s_centreColumn {(s_columns / 2) - 1};
 	static constexpr std::size_t s_centreRow {(s_rows / 2)};
 
-	auto& setGrid() { return m_grid; }
-	const auto& getGrid() const { return m_grid; }
+	char& operator()(const std::size_t row, const std::size_t column);
 
 private:
 	std::array<std::array<char, s_columns>, s_rows> m_grid {};

@@ -14,9 +14,9 @@ void Game::draw()
 			const auto& [row, col] { p.getPositon() };
 
 			// Lengthens the paddle based on its centre position
-			m_level.setGrid()[row][col] = s_symbols[paddle];
-			m_level.setGrid()[row - 1][col] = s_symbols[paddle];
-			m_level.setGrid()[row + 1][col] = s_symbols[paddle];
+			m_level(row, col) = s_symbols[paddle];
+			m_level(row - 1, col) = s_symbols[paddle];
+			m_level(row + 1, col) = s_symbols[paddle];
 		}
 	};
 
@@ -26,7 +26,7 @@ void Game::draw()
 		{
 			const auto& [row, col] { b.getPosition() };
 
-			m_level.setGrid()[row][col] = s_symbols[ball];
+			m_level(row, col) = s_symbols[ball];
 		}
 	};
 
@@ -49,22 +49,22 @@ void Game::draw()
 		for (std::size_t col {0}; col < Level::s_columns; ++col)
 		{
 			// Adds padding
-			m_level.setGrid()[row][col] = ' ';
+			m_level(row, col) = ' ';
 
 			// Draws the level's top and bottom borders
 			if (row == 0 || row == Level::s_rows - 1)
-				m_level.setGrid()[row][col] = s_symbols[level_border];
+				m_level(row, col) = s_symbols[level_border];
 
 			// Draws the level's centre line, excluding the top and bottom rows 
 			if (col == Level::s_centreColumn && (row != 0 && row != Level::s_rows - 1))
-				m_level.setGrid()[row][col] = s_symbols[level_centre];
+				m_level(row, col) = s_symbols[level_centre];
 
 			drawPaddle(m_playerOne);
 			drawPaddle(m_playerTwo);
 
 			drawBall(m_ball);
 
-			std::cout << m_level.getGrid()[row][col];
+			std::cout << m_level(row, col);
 		}
 
 		std::cout << '\n';
@@ -122,8 +122,8 @@ void Game::logic()
 	const auto& [vRow, vCol] { m_ball.getVerticalFront() };
 
 	// The objects directly in front of the ball in a given plane
-	char verticalCollisionObject {m_level.getGrid()[vRow][vCol]};
-	char horizontalCollisionObject {m_level.getGrid()[hRow][hCol]};
+	char verticalCollisionObject {m_level(vRow, vCol)};
+	char horizontalCollisionObject {m_level(hRow, hCol)};
 
 	if (verticalCollisionObject == s_symbols[level_border])
 	{
