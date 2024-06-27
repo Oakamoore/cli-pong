@@ -9,8 +9,11 @@ Paddle::Paddle(Position<std::size_t> startPos)
 
 void Paddle::updatePosition()
 {
-	// Modify the centre position of the paddle based on it's direction
-	m_centre = m_centre + Directions::positionOffset[m_direction];
+	if (isInBounds())
+	{
+		// Modify the centre position of the paddle based on it's direction
+		m_centre = m_centre + Directions::positionOffset[m_direction];
+	}
 }
 
 bool Paddle::isInBounds() const

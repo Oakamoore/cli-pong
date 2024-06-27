@@ -107,11 +107,9 @@ void Game::input()
 
 void Game::update()
 {
-	if (m_playerOne.isInBounds())
-		m_playerOne.updatePosition();
+	m_playerOne.updatePosition();
 
-	if (m_playerTwo.isInBounds())
-		m_playerTwo.updatePosition();
+	m_playerTwo.updatePosition();
 
 	m_ball.updatePosition();
 }
