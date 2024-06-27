@@ -6,14 +6,13 @@
 
 A command line implementation of **two player** pong, built using [WinAPI](https://learn.microsoft.com/en-us/previous-versions/aa383723(v=vs.85)). 
 
-![demo](./demo.gif)
+![demo](demo/demo.gif)
 
 ### Controls 
 
 Player controls are `W, S`, and `I, K` 
 
-- This can be changed from within in [`config.h`](https://github.com/Oakamoore/cli-pong/blob/main/include/config.h) 
-	- Must be an **uppercase alphabetic** character, or a valid [virtual key code](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
+This can be changed from within in [`config.h`](https://github.com/Oakamoore/cli-pong/blob/main/include/config.h) - must be an **uppercase alphabetic** character, or a valid [virtual key code](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
 
 ## Installation
 
@@ -34,4 +33,12 @@ cd cli-pong
 ```shell
 cmake -S . -B build
 cmake --build build
+```
+
+## Usage 
+
+Once the project is built, navigate to the newly created build directory `cli-pong/build/`, locate the executable and run the program using:
+
+```shell
+./cli-pong
 ```
