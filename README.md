@@ -16,6 +16,8 @@ Player controls are `W, S`, and `I, K` - this can be changed from within in [`co
 
 ## Installation
 
+> A C++20 compatible compiler is required for this program to function as expected
+
 1. Clone this project
 
 ```shell
@@ -38,29 +40,7 @@ cmake -S . -B build
 cmake --build build
 ```
 
-### Specifying a Build Configuration
-
-Depending on the type of [CMake generator](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html) being used, a build configuration (`Debug`, `Release` etc.) can be specified as follows:
-
-#### Single Configuration Generator 
-
-```shell
-# Configure a release build
-cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
-
-# Build release binaries
-cmake --build build
-```
-
-#### Multi-Configuration Generator
-
-```shell
-# Configure the build
-cmake -S . -B build 
-
-# Build release binaries
-cmake --build build --config Release
-```
+A build configuration (`Debug`, `Release` etc.) can also be [specified](https://gist.github.com/Oakamoore/685838c1b4a4c64a008f5461ac9323b5).
 
 ## Usage 
 
